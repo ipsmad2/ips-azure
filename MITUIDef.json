@@ -14,13 +14,25 @@
           "required": true
         },
         "osPlatform": "Windows"
+      },
+      {
+        "name": "adminPassword",
+        "type": "Microsoft.Common.PasswordBox",
+        "label": {
+          "password": "VM user password",
+          "confirmPassword": "Confirm password"
+        },
+        "toolTip": "",
+        "options": {
+          "hideConfirmation": false
+        }
       }
     ],
     "steps": [
     ],
     "outputs": {
-      "adminUsername": "[basics('adminUsername')]"
-
+      "adminUsername": "[basics('adminUsername')]",
+      "adminPassword": "[basics('adminPassword')]"
     }
   }
 }
