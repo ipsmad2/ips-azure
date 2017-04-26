@@ -51,15 +51,19 @@
           },
           {
             "name": "adminPassword",
-            "type": "Microsoft.Common.PasswordBox",
+            "type": "Microsoft.Compute.CredentialsCombo",
             "label": {
               "password": "VM user password",
               "confirmPassword": "Confirm password"
             },
             "toolTip": "",
+            "constraints": {
+              "required":  "true"
+            },
             "options": {
               "hideConfirmation": false
-            }
+            },
+            "osPlatform": "Windows"
           }
 
         ]
@@ -156,7 +160,7 @@
     ],
     "outputs": {
       "adminUsername": "[steps('vmSettings').adminUsername]",
-      "adminPassword": "[steps('vmSettings').adminPassword]",
+      "adminPassword": "[steps('vmSettings').adminPassword.password]",
 
       "mi_publicHostname": "[steps('moveitSettings').mi_publicHostname]",
       "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword]",
