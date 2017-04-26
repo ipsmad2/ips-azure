@@ -45,15 +45,18 @@
             "Basic_A3",
             "Basic_A4",
             "Standard_A0",
-            "Standard_A1"          ]
-        },
-
-        "steps": [
-        ],
-        "outputs": {
-          "adminUsername": "[basics('adminUsername')]",
-          "adminPassword": "[basics('adminPassword')]",
-          "virtualMachineSize": "[basics('virtualMachineSize')]"
+            "Standard_A1"
+          ]
         }
       }
+    ],
+
+    "steps": [
+    ],
+    "outputs": {
+      "adminUsername": "[basics('adminUsername')]",
+      "adminPassword": "[basics('adminPassword')]",
+      "virtualMachineSize": "[basics('virtualMachineSize')]"
+    }
+  }
 }
