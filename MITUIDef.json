@@ -38,15 +38,7 @@
           "Standard_DS1_v2"
         ],
         "constraints": {
-          "excludedSizes": [
-            "Basic_A0",
-            "Basic_A1",
-            "Basic_A2",
-            "Basic_A3",
-            "Basic_A4",
-            "Standard_A0",
-            "Standard_A1"
-          ]
+
         },
         "osPlatform": "Windows",
         "count": 1
