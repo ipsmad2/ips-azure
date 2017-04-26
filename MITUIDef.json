@@ -26,40 +26,43 @@
         "options": {
           "hideConfirmation": false
         }
-      },
-
-      {
-        "name": "virtualMachineSize",
-        "type": "Microsoft.Compute.SizeSelector",
-        "label": "Size",
-        "toolTip": "",
-        "recommendedSizes": [
-          "Standard_D1",
-          "Standard_D2",
-          "Standard_D3"
-        ],
-        "constraints": {
-          "allowedSizes": [],
-          "excludedSizes": []
-        },
-        "osPlatform": "Windows",
-        "imageReference": {
-          "publisher": "MicrosoftWindowsServer",
-          "offer": "WindowsServer",
-          "sku": "2012-R2-Datacenter"
-        },
-        "count": 2,
-        "visible": true
       }
-
     ],
 
     "steps": [
+      {
+        "name": "moveitSettings",
+        "label": "MOVEit Transfer Settings",
+        "subLabel": {
+          "preValidation": "Required",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "MOVEit Transfer Settings",
+        "elements": [
+          {
+            "name": "mi_publicHostname",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Public hostname",
+            "toolTip": "Enter the hostname to which you will assign this VM once it is running"
+          },
+          {
+            "name": "mi_sysadminPassword",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "MOVEit sysadmin password",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": "Enter the desired password for the MOVEit Transfer sysadmin account"
+          }
+        ]
+      }
     ],
     "outputs": {
       "adminUsername": "[basics('adminUsername')]",
       "adminPassword": "[basics('adminPassword')]",
-      "virtualMachineSize": "[basics('virtualMachineSize')]"
+
+      "mi_publicHostname": "[steps('moveitSettings').mi_publicHostname]",
+      "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword]"
     }
   }
 }
