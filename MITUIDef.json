@@ -155,7 +155,7 @@
           {
             "name": "mi_smtpUsername",
             "type": "Microsoft.Common.TextBox",
-            "label": "Username to authenticate to SMTP server",
+            "label": "SMTP username",
             "toolTip": "Username to authenticate to SMTP server",
             "constraints": {
               "required": true
@@ -165,7 +165,7 @@
             "name": "mi_smtpPassword",
             "type": "Microsoft.Common.PasswordBox",
             "label": {
-              "password": "Password used to authenticate to SMTP server",
+              "password": "SMTP password",
               "confirmPassword": "Confirm password"
             },
             "toolTip": "Password used to authenticate to SMTP server",
