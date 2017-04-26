@@ -17,6 +17,33 @@
         "bladeTitle": "Virtual Machine Settings",
         "elements": [
           {
+            "name": "adminUsername",
+            "type": "Microsoft.Compute.UserNameTextBox",
+            "label": "VM user name",
+            "defaultValue": "",
+            "toolTip": "",
+            "constraints": {
+              "required": true
+            },
+            "osPlatform": "Windows"
+          },
+          {
+            "name": "adminPassword",
+            "type": "Microsoft.Compute.CredentialsCombo",
+            "label": {
+              "password": "VM user password",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": "",
+            "constraints": {
+              "required": "true"
+            },
+            "options": {
+              "hideConfirmation": false
+            },
+            "osPlatform": "Windows"
+          },
+          {
             "name": "virtualMachineSize",
             "type": "Microsoft.Compute.SizeSelector",
             "label": "VM size",
@@ -37,33 +64,6 @@
             },
             "osPlatform": "Windows",
             "count": 1
-          },
-          {
-            "name": "adminUsername",
-            "type": "Microsoft.Compute.UserNameTextBox",
-            "label": "VM user name",
-            "defaultValue": "",
-            "toolTip": "",
-            "constraints": {
-              "required": true
-            },
-            "osPlatform": "Windows"
-          },
-          {
-            "name": "adminPassword",
-            "type": "Microsoft.Compute.CredentialsCombo",
-            "label": {
-              "password": "VM user password",
-              "confirmPassword": "Confirm password"
-            },
-            "toolTip": "",
-            "constraints": {
-              "required":  "true"
-            },
-            "options": {
-              "hideConfirmation": false
-            },
-            "osPlatform": "Windows"
           }
 
         ]
@@ -83,15 +83,24 @@
             "label": "Public hostname",
             "toolTip": "Enter the hostname to which you will assign this VM once it is running"
           },
+
           {
             "name": "mi_sysadminPassword",
-            "type": "Microsoft.Common.PasswordBox",
+            "type": "Microsoft.Compute.CredentialsCombo",
             "label": {
               "password": "MOVEit sysadmin password",
               "confirmPassword": "Confirm password"
             },
-            "toolTip": "Enter the desired password for the MOVEit Transfer sysadmin account"
+            "toolTip": "",
+            "constraints": {
+              "required": "true"
+            },
+            "options": {
+              "hideConfirmation": false
+            },
+            "osPlatform": "Windows"
           }
+
         ]
       },
 
