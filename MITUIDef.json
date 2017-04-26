@@ -1,0 +1,204 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json",
+
+  "handler": "Microsoft.Compute.MultiVm",
+  "version": "0.0.1-preview",
+  "parameters": {
+    "basics": [
+      {
+        "name": "adminUsername",
+        "type": "Microsoft.Compute.UserNameTextBox",
+        "label": "VM user name",
+        "defaultValue": "",
+        "toolTip": "",
+        "constraints": {
+          "required": true
+        },
+        "osPlatform": "Windows"
+      },
+      {
+        "name": "adminPassword",
+        "type": "Microsoft.Common.PasswordBox",
+        "label": {
+          "password": "VM user password",
+          "confirmPassword": "Confirm password"
+        },
+        "toolTip": "",
+        "options": {
+          "hideConfirmation": false
+        }
+      },
+
+      {
+        "name": "virtualMachineSize",
+        "type": "Microsoft.Compute.SizeSelector",
+        "label": "VM size",
+        "toolTip": "Select VM Size (will use 2 data disks)",
+        "recommendedSizes": [
+          "Standard_DS3"
+        ],
+        "constraints": {
+          "required": "[equals(steps('nodesSettings').deploymentType, 'Cluster')]",
+          "allowedSizes": [
+            "Standard_A3",
+            "Standard_A4",
+            "Standard_A6",
+            "Standard_A7",
+            "Standard_A8",
+            "Standard_A9",
+            "Standard_A10",
+            "Standard_A11",
+            "Standard_D3",
+            "Standard_D4",
+            "Standard_D12",
+            "Standard_D13",
+            "Standard_D14",
+            "Standard_D3_v2",
+            "Standard_D4_v2",
+            "Standard_D5_v2",
+            "Standard_D12_v2",
+            "Standard_D13_v2",
+            "Standard_D14_v2",
+            "Standard_D15_v2",
+            "Standard_DS3",
+            "Standard_DS4",
+            "Standard_DS12",
+            "Standard_DS13",
+            "Standard_DS14",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_DS12_v2",
+            "Standard_DS13_v2",
+            "Standard_DS14_v2",
+            "Standard_DS15_v2",
+            "Standard_F4",
+            "Standard_F8",
+            "Standard_F16",
+            "Standard_F4s",
+            "Standard_F8s",
+            "Standard_F16s",
+            "Standard_G2",
+            "Standard_G3",
+            "Standard_G4",
+            "Standard_G5",
+            "Standard_GS2",
+            "Standard_GS3",
+            "Standard_GS4",
+            "Standard_GS5"
+          ]
+        },
+        "osPlatform": "Windows",
+        "count": 1
+      }
+    ],
+    "steps": [
+      {
+        "name": "moveitSettings",
+        "label": "MOVEit Transfer Settings",
+        "subLabel": {
+          "preValidation": "Required",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "MOVEit Transfer Settings",
+        "elements": [
+          {
+            "name": "mi_publicHostname",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Public hostname",
+            "toolTip": "Enter the hostname to which you will assign this VM once it is running"
+          },
+          {
+            "name": "mi_sysadminPassword",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "MOVEit sysadmin password",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": "Enter the desired password for the MOVEit Transfer sysadmin account"
+          }
+        ]
+      },
+
+      {
+        "name": "emailSettings",
+        "label": "Email Settings 1",
+        "subLabel": {
+          "preValidation": "Required",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Email Settings 2",
+        "elements": [
+          {
+            "name": "mi_emailTo",
+            "type": "Microsoft.Common.TextBox",
+            "label": "'To' address for error emails",
+            "toolTip": "(TBD)"
+          },
+          {
+            "name": "mi_emailFrom",
+            "type": "Microsoft.Common.TextBox",
+            "label": "'From' address for error emails",
+            "toolTip": "(TBD)"
+          },
+          {
+            "name": "mi_emailTo",
+            "type": "Microsoft.Common.TextBox",
+            "label": "'To' address for error emails",
+            "toolTip": "(TBD)"
+          },
+          {
+            "name": "mi_smtpHost",
+            "type": "Microsoft.Common.TextBox",
+            "label": "SMTP hostname",
+            "toolTip": "(TBD)"
+          },
+          {
+            "name": "mi_smtpPort",
+            "type": "Microsoft.Common.TextBox",
+            "label": "TCP port of SMTP server",
+            "toolTip": "(TBD)",
+            "constraints": {
+              "required": true,
+              "regex": "^([0-9]){1,5}$",
+              "validationMessage": "Port number must be a valid TCP port number"
+            }
+
+          },
+          {
+            "name": "mi_smtpUsername",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Username to authenticate to SMTP server",
+            "toolTip": "(TBD)"
+          },
+          {
+            "name": "mi_smtpPassword",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "Password used to authenticate to SMTP server",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": "Enter the desired password for the MOVEit Transfer sysadmin account"
+          }
+
+        ]
+      }
+    ],
+    "outputs": {
+      "adminUsername": "[basics('adminUsername')]",
+      "adminPassword": "[basics('adminPassword')]",
+      "virtualMachineSize": "[basics('virtualMachineSize')]",
+
+      "mi_publicHostname": "[steps('moveitSettings').mi_publicHostname]",
+      "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword]",
+
+      "mi_emailTo": "[steps('emailSettings').mi_emailTo]",
+      "mi_emailFrom": "[steps('emailSettings').mi_emailFrom]",
+      "mi_smtpHost": "[steps('emailSettings').mi_smtpHost]",
+      "mi_smtpPort": "[steps('emailSettings').mi_smtpPort]",
+      "mi_smtpUsername": "[steps('emailSettings').mi_smtpUsername]",
+      "mi_smtpPassword": "[steps('emailSettings').mi_smtpPassword]"
+    }
+  }
+}
+
