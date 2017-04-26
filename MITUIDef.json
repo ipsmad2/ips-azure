@@ -4,32 +4,66 @@
   "version": "0.1.2-preview",
   "parameters": {
     "basics": [
-      {
-        "name": "adminUsername",
-        "type": "Microsoft.Compute.UserNameTextBox",
-        "label": "VM user name",
-        "defaultValue": "",
-        "toolTip": "",
-        "constraints": {
-          "required": true
-        },
-        "osPlatform": "Windows"
-      },
-      {
-        "name": "adminPassword",
-        "type": "Microsoft.Common.PasswordBox",
-        "label": {
-          "password": "VM user password",
-          "confirmPassword": "Confirm password"
-        },
-        "toolTip": "",
-        "options": {
-          "hideConfirmation": false
-        }
-      }
     ],
 
     "steps": [
+      {
+        "name": "vmSettings",
+        "label": "Virtual Machine Settings",
+        "subLabel": {
+          "preValidation": "Required",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Virtual Machine Settings",
+        "elements": [
+          {
+            "name": "virtualMachineSize",
+            "type": "Microsoft.Compute.SizeSelector",
+            "label": "VM size",
+            "toolTip": "Select VM Size",
+            "recommendedSizes": [
+              "Standard_DS1_v2"
+            ],
+            "constraints": {
+              "excludedSizes": [
+                "Basic_A0",
+                "Basic_A1",
+                "Basic_A2",
+                "Basic_A3",
+                "Basic_A4",
+                "Standard_A0",
+                "Standard_A1"
+              ]
+            },
+            "osPlatform": "Windows",
+            "count": 1
+          },
+          {
+            "name": "adminUsername",
+            "type": "Microsoft.Compute.UserNameTextBox",
+            "label": "VM user name",
+            "defaultValue": "",
+            "toolTip": "",
+            "constraints": {
+              "required": true
+            },
+            "osPlatform": "Windows"
+          },
+          {
+            "name": "adminPassword",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "VM user password",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": "",
+            "options": {
+              "hideConfirmation": false
+            }
+          }
+
+        ]
+      },
       {
         "name": "moveitSettings",
         "label": "MOVEit Transfer Settings",
@@ -58,8 +92,8 @@
       }
     ],
     "outputs": {
-      "adminUsername": "[basics('adminUsername')]",
-      "adminPassword": "[basics('adminPassword')]",
+      "adminUsername": "[steps('vmSettings').adminUsername]",
+      "adminPassword": "[steps('vmSettings').adminPassword]",
 
       "mi_publicHostname": "[steps('moveitSettings').mi_publicHostname]",
       "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword]"
