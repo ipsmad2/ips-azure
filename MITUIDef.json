@@ -1,8 +1,7 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json",
-
   "handler": "Microsoft.Compute.MultiVm",
-  "version": "0.0.1-preview",
+  "version": "0.1.2-preview",
   "parameters": {
     "basics": [
       {
@@ -118,70 +117,6 @@
             "toolTip": "Enter the desired password for the MOVEit Transfer sysadmin account"
           }
         ]
-      },
-
-      {
-        "name": "emailSettings",
-        "label": "Email Settings 1",
-        "subLabel": {
-          "preValidation": "Required",
-          "postValidation": "Done"
-        },
-        "bladeTitle": "Email Settings 2",
-        "elements": [
-          {
-            "name": "mi_emailTo",
-            "type": "Microsoft.Common.TextBox",
-            "label": "'To' address for error emails",
-            "toolTip": "(TBD)"
-          },
-          {
-            "name": "mi_emailFrom",
-            "type": "Microsoft.Common.TextBox",
-            "label": "'From' address for error emails",
-            "toolTip": "(TBD)"
-          },
-          {
-            "name": "mi_emailTo",
-            "type": "Microsoft.Common.TextBox",
-            "label": "'To' address for error emails",
-            "toolTip": "(TBD)"
-          },
-          {
-            "name": "mi_smtpHost",
-            "type": "Microsoft.Common.TextBox",
-            "label": "SMTP hostname",
-            "toolTip": "(TBD)"
-          },
-          {
-            "name": "mi_smtpPort",
-            "type": "Microsoft.Common.TextBox",
-            "label": "TCP port of SMTP server",
-            "toolTip": "(TBD)",
-            "constraints": {
-              "required": true,
-              "regex": "^([0-9]){1,5}$",
-              "validationMessage": "Port number must be a valid TCP port number"
-            }
-
-          },
-          {
-            "name": "mi_smtpUsername",
-            "type": "Microsoft.Common.TextBox",
-            "label": "Username to authenticate to SMTP server",
-            "toolTip": "(TBD)"
-          },
-          {
-            "name": "mi_smtpPassword",
-            "type": "Microsoft.Common.PasswordBox",
-            "label": {
-              "password": "Password used to authenticate to SMTP server",
-              "confirmPassword": "Confirm password"
-            },
-            "toolTip": "Enter the desired password for the MOVEit Transfer sysadmin account"
-          }
-
-        ]
       }
     ],
     "outputs": {
@@ -190,14 +125,9 @@
       "virtualMachineSize": "[basics('virtualMachineSize')]",
 
       "mi_publicHostname": "[steps('moveitSettings').mi_publicHostname]",
-      "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword]",
+      "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword]"
 
-      "mi_emailTo": "[steps('emailSettings').mi_emailTo]",
-      "mi_emailFrom": "[steps('emailSettings').mi_emailFrom]",
-      "mi_smtpHost": "[steps('emailSettings').mi_smtpHost]",
-      "mi_smtpPort": "[steps('emailSettings').mi_smtpPort]",
-      "mi_smtpUsername": "[steps('emailSettings').mi_smtpUsername]",
-      "mi_smtpPassword": "[steps('emailSettings').mi_smtpPassword]"
+
     }
   }
 }
