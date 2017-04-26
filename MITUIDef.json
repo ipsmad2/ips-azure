@@ -117,31 +117,35 @@
             "name": "mi_emailTo",
             "type": "Microsoft.Common.TextBox",
             "label": "'To' address for error emails",
-            "toolTip": "(TBD)"
+            "toolTip": "Address to which emails will be sent when there is a serious error",
+            "constraints": {
+              "required": true
+            }
           },
           {
             "name": "mi_emailFrom",
             "type": "Microsoft.Common.TextBox",
             "label": "'From' address for error emails",
-            "toolTip": "(TBD)"
+            "toolTip": "'From' address used for error emails",
+            "constraints": {
+              "required": true
+            }
           },
-          {
-            "name": "mi_emailTo",
-            "type": "Microsoft.Common.TextBox",
-            "label": "'To' address for error emails",
-            "toolTip": "(TBD)"
-          },
+
           {
             "name": "mi_smtpHost",
             "type": "Microsoft.Common.TextBox",
             "label": "SMTP hostname",
-            "toolTip": "(TBD)"
+            "toolTip": "Hostname of the SMTP server to use to deliver email.  You can set up an account with various third-party providers, including SocketLabs.com",
+            "constraints": {
+              "required": true
+            }
           },
           {
             "name": "mi_smtpPort",
             "type": "Microsoft.Common.TextBox",
             "label": "TCP port of SMTP server",
-            "toolTip": "(TBD)",
+            "toolTip": "Port number of SMTP server, often 587",
             "constraints": {
               "required": true,
               "regex": "^([0-9]){1,5}$",
@@ -152,7 +156,10 @@
             "name": "mi_smtpUsername",
             "type": "Microsoft.Common.TextBox",
             "label": "Username to authenticate to SMTP server",
-            "toolTip": "(TBD)"
+            "toolTip": "Username to authenticate to SMTP server",
+            "constraints": {
+              "required": true
+            }
           },
           {
             "name": "mi_smtpPassword",
@@ -161,7 +168,10 @@
               "password": "Password used to authenticate to SMTP server",
               "confirmPassword": "Confirm password"
             },
-            "toolTip": "Enter the desired password for the MOVEit Transfer sysadmin account"
+            "toolTip": "Password used to authenticate to SMTP server",
+            "constraints": {
+              "required": true
+            }
           }
         ]
       }
@@ -172,7 +182,7 @@
       "adminPassword": "[steps('vmSettings').adminPassword.password]",
 
       "mi_publicHostname": "[steps('moveitSettings').mi_publicHostname]",
-      "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword]",
+      "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword.password]",
 
       "mi_emailTo": "[steps('emailSettings').mi_emailTo]",
       "mi_emailFrom": "[steps('emailSettings').mi_emailFrom]",
