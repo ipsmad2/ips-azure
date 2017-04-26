@@ -28,21 +28,30 @@
         }
       },
 
-
       {
         "name": "virtualMachineSize",
         "type": "Microsoft.Compute.SizeSelector",
-        "label": "VM size",
-        "toolTip": "Select VM Size",
+        "label": "Size",
+        "toolTip": "",
         "recommendedSizes": [
-          "Standard_DS1_v2"
+          "Standard_D1",
+          "Standard_D2",
+          "Standard_D3"
         ],
         "constraints": {
-
+          "allowedSizes": [],
+          "excludedSizes": []
         },
         "osPlatform": "Windows",
-        "count": 1
+        "imageReference": {
+          "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
+          "sku": "2012-R2-Datacenter"
+        },
+        "count": 2,
+        "visible": true
       }
+
     ],
 
     "steps": [
