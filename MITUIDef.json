@@ -92,43 +92,13 @@
       }
     ],
     "steps": [
-      {
-        "name": "moveitSettings",
-        "label": "MOVEit Transfer Settings",
-        "subLabel": {
-          "preValidation": "Required",
-          "postValidation": "Done"
-        },
-        "bladeTitle": "MOVEit Transfer Settings",
-        "elements": [
-          {
-            "name": "mi_publicHostname",
-            "type": "Microsoft.Common.TextBox",
-            "label": "Public hostname",
-            "toolTip": "Enter the hostname to which you will assign this VM once it is running"
-          },
-          {
-            "name": "mi_sysadminPassword",
-            "type": "Microsoft.Common.PasswordBox",
-            "label": {
-              "password": "MOVEit sysadmin password",
-              "confirmPassword": "Confirm password"
-            },
-            "toolTip": "Enter the desired password for the MOVEit Transfer sysadmin account"
-          }
-        ]
-      }
     ],
     "outputs": {
       "adminUsername": "[basics('adminUsername')]",
       "adminPassword": "[basics('adminPassword')]",
-      "virtualMachineSize": "[basics('virtualMachineSize')]",
-
-      "mi_publicHostname": "[steps('moveitSettings').mi_publicHostname]",
-      "mi_sysadminPassword": "[steps('moveitSettings').mi_sysadminPassword]"
+      "virtualMachineSize": "[basics('virtualMachineSize')]"
 
 
     }
   }
 }
-
