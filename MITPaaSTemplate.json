@@ -424,9 +424,23 @@
           "properties": {
             "collation": "[variables('mitsqldatabaseCollation')]",
             "edition": "[parameters('mitsqldatabaseEdition')]",
-            "maxSizeBytes": "1073741824",
+            "maxSizeBytes": "214748364800",
             "requestedServiceObjectiveName": "[parameters('mitsqldatabaseRequestedServiceObjectiveName')]"
-          }
+          },
+          "resources": [
+            {
+            "comments": "Transparent Data Encryption",
+              "name": "current",
+              "type": "transparentDataEncryption",
+              "apiVersion": "2014-04-01-preview",
+              "properties": {
+                "status": "Enabled"
+              },
+              "dependsOn": [
+                "[variables('mitSqlDatabaseName')]"
+              ]
+            }
+          ]
         }
       ]
     },
