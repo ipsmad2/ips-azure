@@ -43,14 +43,9 @@
       "type": "securestring"
     },
 
-    "mitsqldatabaseCollation": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "SQL_Latin1_General_CP1_CI_AS"
-    },
     "mitsqldatabaseEdition": {
       "type": "string",
-      "defaultValue": "Basic",
+      "defaultValue": "Standard",
       "allowedValues": [
         "Basic",
         "Standard",
@@ -59,7 +54,7 @@
     },
     "mitsqldatabaseRequestedServiceObjectiveName": {
       "type": "string",
-      "defaultValue": "Basic",
+      "defaultValue": "S0",
       "allowedValues": [
         "Basic",
         "S0",
@@ -89,8 +84,8 @@
     "publicIpAddressType": "dynamic",
     "sqlServerName": "[concat('mitsqlserver', uniqueString(resourceGroup().id))]",
     "sqlserverAdminLogin": "sqladmin",
-    "mitSqlDatabaseName": "mitsqldatabase"
-
+    "mitSqlDatabaseName": "mitsqldatabase",
+    "mitsqldatabaseCollation": "SQL_Latin1_General_CP1_CI_AS"
   },
   "resources": [
     {
@@ -391,7 +386,7 @@
       },
       "resources": [
         {
-          "name": "AllowAllWindowsAzureIps",
+          "name": "AllowMITPublicIp",
           "type": "firewallrules",
           "location": "[resourceGroup().location]",
           "apiVersion": "2014-04-01-preview",
@@ -399,8 +394,8 @@
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
           ],
           "properties": {
-            "startIpAddress": "[reference(variables('publicIpAddressName')).ipAddress]",
-            "endIpAddress": "0.0.0.0"
+            "startIpAddress": "[reference(resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))).ipAddress]",
+            "endIpAddress": "[reference(resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))).ipAddress]"
           }
         },
         {
@@ -415,7 +410,7 @@
             "displayName": "MIT SQL Database"
           },
           "properties": {
-            "collation": "[parameters('mitsqldatabaseCollation')]",
+            "collation": "[variables('mitsqldatabaseCollation')]",
             "edition": "[parameters('mitsqldatabaseEdition')]",
             "maxSizeBytes": "1073741824",
             "requestedServiceObjectiveName": "[parameters('mitsqldatabaseRequestedServiceObjectiveName')]"
