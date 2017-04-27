@@ -67,6 +67,17 @@
       "metadata": {
         "description": "Describes the performance level for Edition"
       }
+    },
+    "storageAccountFilesType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ]
     }
 
   },
@@ -85,7 +96,8 @@
     "sqlServerName": "[concat('mitsqlserver', uniqueString(resourceGroup().id))]",
     "sqlserverAdminLogin": "sqladmin",
     "mitSqlDatabaseName": "mitsqldatabase",
-    "mitsqldatabaseCollation": "SQL_Latin1_General_CP1_CI_AS"
+    "mitsqldatabaseCollation": "SQL_Latin1_General_CP1_CI_AS",
+    "storageAccountFilesName": "[concat('safiles', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
@@ -417,12 +429,31 @@
           }
         }
       ]
+    },
+    {
+      "name": "[variables('storageAccountFilesName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-01-01",
+      "sku": {
+        "name": "[parameters('storageAccountFilesType')]"
+      },
+      "dependsOn": [],
+      "tags": {
+        "displayName": "storageAccountFiles"
+      },
+      "kind": "Storage"
     }
   ],
   "outputs": {
     "adminUsername": {
       "type": "string",
       "value": "[parameters('adminUsername')]"
+    },
+    "sqlDatabaseFQDN": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Sql/servers', variables('sqlServerName'))).fullyQualifiedDomainName]"
     }
+
   }
 }
